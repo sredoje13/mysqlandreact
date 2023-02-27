@@ -1,0 +1,29 @@
+.deletecontainer{
+background-color: rgb(216, 54, 81);
+color:rgb(230, 182, 196);
+padding:20px;
+border-radius:20px;
+margin-top:30px;
+animation:delete 2s ease-in-out
+}
+.buttoncontainer{
+ display:flex;
+ justify-content: space-around;
+}
+.buttondelete{
+
+}
+@keyframes delete{
+    0%{
+   opacity:0;
+   transform:translateY(100px)
+    }
+    50%{
+        opacity:0.5;
+        transform:translateY(-10px)
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0px)
+    }
+}

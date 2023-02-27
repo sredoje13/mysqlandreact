@@ -1,0 +1,113 @@
+@keyframes butt1{
+    0%{  
+    opacity: 0;
+    scale: 0.2;
+    }
+    50%{  
+  opacity: 0.5;
+    }
+     100%{
+opacity: 1;
+scale:1
+     }   
+    
+}
+@keyframes h11{
+    0%{
+        transform: translateY(-100px);
+    }
+    50%{
+        transform: translateY(20px); 
+    }
+    100%{
+        transform: translateY(0px)
+    }
+}
+
+
+
+
+ .link{
+    text-decoration: none;
+    color:pink;
+    width:150px;
+    height:80px;
+   margin: 15px;
+   
+    background-color: rgb(223, 89, 134);
+   border-radius: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border:none;
+   box-shadow: 0px 0px 10px 5px rgb(189, 15, 110);
+   animation: butt1 2s ease-in-out;
+ }
+ .link:hover{
+    color:rgb(226, 20, 106);
+    scale: 1.1;
+   background-color: rgb(238, 207, 214);
+ }
+ 
+
+.buuttondiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.h1{
+    font-family: 'Rowdies', cursive;
+    color:rgb(241, 165, 178);
+    text-shadow: 2px 2px black;
+    font-size: 500%;
+    margin-top: 20%;
+   animation: h11 1s ease;
+}
+.h2{
+    color:rgb(155, 107, 115)
+}
+
+@media only screen and (max-width:830px){
+   .h1{
+    font-size: 300%;
+   }
+    }
+ @media only screen and (max-width:680px){
+    .h2{
+        font-size: large;
+    }
+   }
+ @media only screen and (max-width:500px){
+    .h1{
+        font-size: 200%;
+    } 
+    .h2{
+        font-size: smaller;
+    }
+    .link{
+        font-size: smaller;
+        margin: 10px;
+        width:100px;
+        height:50px;
+    }
+
+}
+@media only screen and (max-width:370px){
+    .h1{
+        font-size: 150%;
+    } 
+    .h2{
+        font-size: x-small;
+    }
+    .link{
+        font-size: x-small;
+        margin: 5px;
+        width:80px;
+        height:30px;
+    }
+    }
+    @media only screen and (max-width:300px){
+    
+    }

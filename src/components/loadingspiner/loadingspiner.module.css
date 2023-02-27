@@ -1,0 +1,60 @@
+.first{
+    -webkit-animation: load 1.5s infinite;
+  animation: load 1.5s infinite;
+  scale:2;
+  margin: 5%;
+
+}
+.second{
+    -webkit-animation: load 1.5s infinite 0.5s;
+  animation: load 1.5s infinite 0.5s;
+  scale:2;
+  margin: 5%;
+}
+.third{
+    -webkit-animation: load 1.5s infinite 1s;
+    animation: load 1.5s infinite 1s;
+    scale:2;
+    margin: 5%;
+}
+.div{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.alldiv{
+    margin-top: 20%;
+    background-color: rgb(238, 202, 214);
+    padding :20px;
+    border-radius: 20px;
+
+}
+.alldiv h1{
+    color:rgb(177, 40, 81)
+}
+@keyframes load {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @media only screen and (max-width:531px){
+   .alldiv{
+    padding:10px;
+   }
+   .alldiv h1{
+    font-size: x-large;
+   }
+    
+   }
+ @media only screen and (max-width:370px){
+   
+  .alldiv{
+    padding:10px;
+   }
+   .alldiv h1{
+    font-size: medium;
+   }
+}

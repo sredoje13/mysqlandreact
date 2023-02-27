@@ -1,0 +1,189 @@
+.form{
+display: flex;
+flex-direction: column;
+align-items: center;
+scale:1.6;
+margin-top: 10%
+}
+.input{
+width:25%;
+color:rgb(170, 1, 72);
+box-shadow: 0px 0px 7px 4px rgb(170, 1, 72);
+}
+.error{
+    width:15%;
+    background-color: rgb(226, 104, 125);
+    box-shadow: 0px 0px 7px 7px rgb(255, 255, 255);
+    border:2px solid white;
+}
+.formbutton{
+margin-top: 2%;
+width:7%;
+background-color:  rgb(170, 1, 72);
+color:white;
+border-radius: 20px;
+font-size: x-small;
+}
+.label{
+    color:rgb(170, 1, 72);
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+.icon{
+    margin-bottom: -3px;
+    margin-left: 5px;
+}
+.formbutton:hover{
+    color:rgb(170, 1, 72);
+    background-color: white;
+    border:-4px solid white;
+    box-shadow: 0px 0px 7px 4px rgb(170, 1, 72);;
+}
+@keyframes left{
+    from{
+     transform:translateX(-50%)   
+    }
+    to{
+        transform:translateX(0%)   
+    }
+}
+@keyframes right{
+    from{
+     transform:translateX(50%)   
+    }
+    to{
+        transform:translateX(0%)   
+    }
+}
+.left{
+    animation: left 2s ease;
+}
+.right{
+    animation: right 2s ease;
+}
+.divlink{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15%;
+}
+.link{
+    color:white;
+    text-decoration: none;
+}
+
+.buttonlink{
+    background-color:  rgb(170, 1, 72);
+width: 30%;
+text-align: center;
+}
+.buttonlink:hover{
+   scale:1.2;
+}
+@keyframes heart{
+    from{
+   transform: translateY(0px);
+    }
+    to{
+        transform: translateY(-90vh);
+        opacity:0
+    }
+}
+.img1{
+    width:80px;
+    height:80px;
+    position:absolute;
+    animation: heart 15s infinite;
+    margin-right: 80%;
+    margin-top:-20%
+}
+.img2{
+    width:50px;
+    height:50px;
+    position:absolute;
+    animation: heart 10s infinite;
+    margin-right: 40%;
+}
+.img3{
+    width:50px;
+    height:50px;
+    position:absolute;
+    animation: heart 15s infinite;
+    margin-top:-20%
+}
+.img4{
+    width:70px;
+    height:70px;
+    position:absolute;
+    animation: heart 10s infinite;
+    margin-left: 40%;
+   
+}
+.img5{
+    width:80px;
+    height:80px;
+    position:absolute;
+    animation: heart 15s infinite;
+    margin-left: 80%;
+    margin-top:-20%
+}
+.heartdiv{display: flex;
+justify-content: space-around;}
+
+@media only screen and (max-width:730px){
+   
+    .formbutton{
+   width: 10%;
+    }
+   
+    .input,.error{
+        font-size: smaller;
+    }
+
+    .label{
+     font-size: smaller;
+    }
+
+    }
+ @media only screen and (max-width:535px){
+    .buttonlink{
+  font-size: x-small;
+  margin-top: 10%;
+    }
+    .formbutton{
+   width: 15%;
+   margin-top: 5%;
+    }
+   
+    .input,.error{
+        font-size: x-small;
+        width:35%
+    }
+
+    .label{
+     font-size: x-small;
+    }
+    
+   }
+ @media only screen and (max-width:340px){
+    .buttonlink{
+        font-size: xx-small;
+        margin-top: 15%;
+          }
+          .formbutton{
+         width: 20%;
+         margin-top: 7%;
+         font-size: 10%;
+          }
+        
+          .input,.error{
+              font-size: xx-small;
+              width:45%
+          }
+      
+          .label{
+           font-size: xx-small;
+          }
+
+}
+
+       
