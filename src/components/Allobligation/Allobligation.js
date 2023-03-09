@@ -9,8 +9,9 @@ import {useDispatch,useSelector} from 'react-redux'
 import { Link } from 'react-router-dom';
 import Deleteitem from '../deleteditem/Deleteitem';
 import Loadingspiner from '../loadingspiner/Loadingspiner';
-
+import {AiOutlineDown,AiOutlineUp} from 'react-icons/ai'
 function Allobligation(props) {
+    const[up,setup]=useState(true)
     const[loading,setisloading]=useState(true)
     const itemms=useSelector((state)=>state.cartitem.item);
     const deletee=useSelector((state)=>state.cartitem.delete);
@@ -22,7 +23,7 @@ const timer=setTimeout(()=>{
 
     const getdatas=async()=>{
 
-        await axios.get("http://localhost:8000/listofobligation")
+        await axios.get("https://jelenatodo.herokuapp.com/listofobligation")
          .then((res)=>
         
          settasks(res.data)
@@ -43,7 +44,7 @@ const deleteitem =(item)=>{
 dispatch(cart.setdelete(item))
 }
 const confirmdelete=async()=>{
-   await axios.delete(`http://localhost:8000/listofobligation/${itemms.id}`)
+   await axios.delete(`https://jelenatodo.herokuapp.com/listofobligation/${itemms.id}`)
    window.location.reload()
 }
 
@@ -69,11 +70,19 @@ color:"rgb(202, 52, 77)"
 )
 
 )
-
+const updownarrow=()=>{
+    setup((prev)=>!prev)
+}
     return (
-      <div className={classes.div}>
+      <div className={classes.div}> 
              {!loading&&<h1 className="title">MOJA TO DO LISTA</h1>}
-
+             <div className='sort'><b><b>SORTIRAJ <span onClick={updownarrow} className='downspan'>
+               { up&&<AiOutlineDown/>}
+             {!up&&<AiOutlineUp/>
+             
+             }
+            { !up&&<div><p>Name</p><p>Date</p></div>}
+             </span></b></b></div>
         {deletee&&<Deleteitem onclick={confirmdelete}name={itemms.name}/>}
      {loading&&<Loadingspiner/>}
         {!loading&&<div className={deletee?`${classes.divall} ${classes.animation}`:`${classes.divall} ${classes.animation2}`} >
@@ -88,6 +97,7 @@ color:"rgb(202, 52, 77)"
                 <div className={classes.text}>
                <b>DATUM</b>
                 </div>
+               
                 <MdDelete style={{visibility:"hidden"}}/>
              <button style={{visibility:"hidden", marginLeft:"20px"}}>ISPRAVI</button>
             </div>

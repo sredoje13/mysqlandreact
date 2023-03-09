@@ -67,7 +67,10 @@ align-items:center
 .animation2{
     animation:move2 1s ease-in-out
 }
+.sort{
+    color: rgb(143, 24, 89);
 
+}
 @keyframes move{
     0%{
   

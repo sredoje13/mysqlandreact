@@ -64,7 +64,7 @@ e.preventDefault()
 try{
 
 if(isvalid){
-   await axios.post("http://localhost:8000/listofobligation",alldatas)
+   await axios.post("https://jelenatodo.herokuapp.com/listofobligation",alldatas)
  restartArea();
 restartDate();
 restartName();
@@ -83,7 +83,7 @@ const updateitems=async(e)=>{
     try{
 
         if(isvalid){
-           await axios.put(`http://localhost:8000/listofobligation/${location[1]}`,alldatas)
+           await axios.put(`https://jelenatodo.herokuapp.com/listofobligation/${location[1]}`,alldatas)
         restartArea();
         restartDate();
         restartName();
