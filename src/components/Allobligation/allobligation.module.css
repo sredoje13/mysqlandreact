@@ -69,7 +69,20 @@ align-items:center
 }
 .sort{
     color: rgb(143, 24, 89);
+    margin: 20px;
 
+}
+.sortone{
+    color:rgb(143, 24, 89)
+}
+.sortone:hover{
+    color:rgb(221, 98, 160);
+    scale:1.2
+}
+.inputsearch{
+    margin-right: 20px;
+    color:rgb(143, 24, 89);
+    border: 2px solid rgb(143, 24, 89)
 }
 @keyframes move{
     0%{

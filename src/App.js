@@ -5,19 +5,27 @@ import Mainpage from './components/Mainpage/Mainpage';
 import Allobligation from './components/Allobligation/Allobligation';
 import Input from './components/Inputpage/Input';
 import Image from './background.jpg'
-import { useSelector,useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { cart } from './components/store/redux';
 import  { Toaster } from 'react-hot-toast';
+import { useEffect,useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 function App() {
+  const loc=useLocation()
+  console.log(loc)
   const dispatch=useDispatch()
-  const update=useSelector((state)=>state.cartitem.update)
-  const location=window.location.pathname
-  if(location!=="/makeobligations"){
+  let location=loc.pathname
+  console.log(location)
+  
+  if(location.includes("/updateitem")){
+   
     dispatch(cart.setupdate())
+    
+    /*  */
     }
-    else{
-      dispatch(cart.unsetupdate()) 
-    }
+    else{ dispatch(cart.unsetupdate()) }
+   
+  
   return (
     <div className="App"
     style={{background:`url(${Image})`,
@@ -34,9 +42,12 @@ function App() {
         <Route path="/allobligations" exact>
     <Allobligation/>
         </Route>
-        <Route path={update?"/updateitem:id":`/makeobligations`}exact>
+        <Route path='/makeobligations'exact>
           <Input/>
 
+        </Route>
+        <Route path='/updateitem:id' exact>
+          <Input/>
         </Route>
         
       </Switch>

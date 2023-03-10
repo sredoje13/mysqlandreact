@@ -1,20 +1,21 @@
-import React from 'react';
+
 import {BsCalendarCheck} from 'react-icons/bs'
 import {MdOutlineNoteAlt} from 'react-icons/md'
 import {GiBowTieRibbon} from 'react-icons/gi'
 import classes from './input.module.css'
 import axios from 'axios'
 import useHook from './useHookinput';
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import Image from '../../Myproject.jpg'
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import toast from 'react-hot-toast'
 function Input(props) {
+
    const history=useHistory()
     const update=useSelector((state)=>state.cartitem.update)
-
-const location=window.location.pathname.split("/")[1].split(":")
+  const loc=useLocation()
+const location=loc.pathname.split("/")[1].split(":")
 
 console.log(location[1])
 
@@ -62,7 +63,7 @@ const alldatas={
 const submitHandler=async(e)=>{
 e.preventDefault()
 try{
-
+ 
 if(isvalid){
    await axios.post("https://jelenatodo.herokuapp.com/listofobligation",alldatas)
  restartArea();
@@ -81,9 +82,9 @@ catch(err){
 const updateitems=async(e)=>{
     e.preventDefault()
     try{
-
+      
         if(isvalid){
-           await axios.put(`https://jelenatodo.herokuapp.com/listofobligation/${location[1]}`,alldatas)
+           await axios.put(`https://todo.herokuapp.com/listofobligation/${location[1]}`,alldatas)
         restartArea();
         restartDate();
         restartName();
@@ -99,6 +100,8 @@ const updateitems=async(e)=>{
             console.log(err)
         }
 }
+
+console.log(update)
     return (
         <div style={{width:"100%", marginTop:"0%"}}>
           {update&&<h1 className="title">ISPRAVITE ZADATAK</h1>}
@@ -125,7 +128,7 @@ const updateitems=async(e)=>{
             </form>
             <div className={classes.divlink}>
           <button  className={`${classes.buttonlink } ${classes.left}`}><Link className={classes.link} to="/">Vratite se na pocetnu stranicu</Link></button> 
-            <button className={`${classes.buttonlink } ${classes.right}`}><Link className={classes.link} to="/">Pogledaj svoju listu</Link></button>
+            <button className={`${classes.buttonlink } ${classes.right}`}><Link className={classes.link} to="/allobligations">Pogledaj svoju listu</Link></button>
             </div> 
             <div className={classes.heartdiv}><img className={classes.img1} src={Image} alt="slika"/>
             <img className={classes.img2} src={Image} alt="slika"/>
