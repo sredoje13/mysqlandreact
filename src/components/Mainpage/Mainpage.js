@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {IoFlowerOutline} from 'react-icons/io5'
 function Mainpage(props) {
     return (
-        <div>
+        <div className={classes.allista}>
            <h1 className={classes.h1}>
             MOJA TO DO LISTA
            </h1>

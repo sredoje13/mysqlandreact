@@ -92,15 +92,20 @@ scale:1
         width:100px;
         height:50px;
     }
+    .allista{
+        margin-top: 200px;
+    }
 
 }
 @media only screen and (max-width:370px){
     .h1{
         font-size: 150%;
+       
     } 
     .h2{
         font-size: x-small;
     }
+    
     .link{
         font-size: x-small;
         margin: 5px;
