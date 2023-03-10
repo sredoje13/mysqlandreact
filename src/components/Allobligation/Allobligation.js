@@ -179,7 +179,7 @@ color:"rgb(202, 52, 77)"
             { !up&&<div><p className={classes.sortone} onClick={sortname}>Name</p>
             <p className={classes.sortone} onClick={sortdate}>Date</p></div>}
              </span></b></div>}
-        {deletee&&<Deleteitem onClick={confirmdelete} name={itemms.name}/>}
+        {deletee&&<Deleteitem onclick={confirmdelete} name={itemms.name}/>}
      {loading&&<Loadingspiner/>}
         {!loading&&<div className={deletee?`${classes.divall} ${classes.animation}`:`${classes.divall} ${classes.animation2}`} >
             

@@ -10,6 +10,7 @@ const cartitem=createSlice({
         },
         setupdate(state,action){
              state.update=true
+             
              },
         unsetupdate(state,action){
             state.update=false

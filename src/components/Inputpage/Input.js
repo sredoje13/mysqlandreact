@@ -15,8 +15,8 @@ function Input(props) {
    const history=useHistory()
     const update=useSelector((state)=>state.cartitem.update)
   const loc=useLocation()
-const location=loc.pathname.split("/")[1].split(":")
-
+const location=window.location.pathname.split("/")[1].split(":")
+console.log(location)
 console.log(location[1])
 
    let isvalid=false
@@ -84,7 +84,7 @@ const updateitems=async(e)=>{
     try{
       
         if(isvalid){
-           await axios.put(`https://todo.herokuapp.com/listofobligation/${location[1]}`,alldatas)
+           await axios.put(`https://jelenatodo.herokuapp.com/listofobligation/${location[1]}`,alldatas)
         restartArea();
         restartDate();
         restartName();
