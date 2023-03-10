@@ -68,6 +68,8 @@ const timer=setTimeout(()=>{
 },3000)
 return()=>clearTimeout(timer)
    
+
+// eslint-disable-next-line no-use-before-define
 },[])
 
 const filterdataday=tasks.filter((item)=>item.date.slice(0,10).includes(dateofobl))
@@ -176,8 +178,8 @@ color:"rgb(202, 52, 77)"
              {!up&&<AiOutlineUp style={{cursor:"pointer"}}/>
              
              }
-            { !up&&<div><p className={classes.sortone} onClick={sortname}>Name</p>
-            <p className={classes.sortone} onClick={sortdate}>Date</p></div>}
+            { !up&&<div><p className={classes.sortone} onClick={sortname}>IME</p>
+            <p className={classes.sortone} onClick={sortdate}>DATUM</p></div>}
              </span></b></div>}
         {deletee&&<Deleteitem onclick={confirmdelete} name={itemms.name}/>}
      {loading&&<Loadingspiner/>}
