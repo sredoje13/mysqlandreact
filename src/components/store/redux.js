@@ -1,7 +1,7 @@
 import { createSlice ,configureStore} from "@reduxjs/toolkit";
 const cartitem=createSlice({
     name:"cartitem",
-    initialState:{ item:{},update:false, delete:false},
+    initialState:{ item:{},update:false, delete:false,tasks:[],heart:false},
     reducers:{
         additem(state,action){
        state.item=action.payload;
@@ -22,6 +22,23 @@ const cartitem=createSlice({
         close(state,action){
             state.delete=false
             },
+        getitems(state,action){
+        state.tasks=action.payload
+
+        },
+        checkitem(state,action) {
+            state.heart=!state.heart
+            const cheking=state.heart
+          const checkeditem=action.payload
+          const showitem={...checkeditem,check:cheking}
+         const itemone=state.tasks.findIndex((item)=>item.id===checkeditem.id)
+         console.log(itemone)
+         state.tasks[itemone]=showitem
+         console.log(state.tasks)
+
+         
+        }
+        
     }
 })
 

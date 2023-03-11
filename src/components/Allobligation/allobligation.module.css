@@ -84,6 +84,22 @@ align-items:center
     color:rgb(143, 24, 89);
     border: 2px solid rgb(143, 24, 89)
 }
+.filtertoday{
+margin: 20px;
+background-color: pink;
+color:rgb(143, 24, 89);
+padding:20px;
+animation:move 1s ease-in;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.filtertodayone{
+  border-bottom: rgb(170, 1, 72);
+  
+}
 @keyframes move{
     0%{
   

@@ -3,6 +3,7 @@ import axios from 'axios';
 import classes from './allobligation.module.css'
 import { useEffect,useState} from 'react';
 import {BsSuitHeart} from 'react-icons/bs'
+import {BsFillSuitHeartFill} from 'react-icons/bs'
 import {MdDelete} from 'react-icons/md'
 import { cart } from '../store/redux';
 import {useDispatch,useSelector} from 'react-redux'
@@ -10,6 +11,8 @@ import { Link } from 'react-router-dom';
 import Deleteitem from '../deleteditem/Deleteitem';
 import Loadingspiner from '../loadingspiner/Loadingspiner';
 import {AiOutlineDown,AiOutlineUp} from 'react-icons/ai'
+import { toast } from 'react-hot-toast';
+
 function Allobligation(props) {
   
  const newDate=new Date()
@@ -23,13 +26,13 @@ const dateofobl=[todayyear,monthzero,todaydate].join("-")
 console.log(dateofobl)
     const[up,setup]=useState(true)
     const[loading,setisloading]=useState(true)
-   
-const[all,setall]=useState([])
+   const[showtodayobligation,setshowtodayobligation]=useState(false)
+const[searchhh,setsearch]=useState([])
     const itemms=useSelector((state)=>state.cartitem.item);
     const deletee=useSelector((state)=>state.cartitem.delete);
-   
+   const tasks=useSelector((state)=>state.cartitem.tasks)
     const dispatch=useDispatch()
-    const [tasks,settasks]=useState([])
+   
 useEffect(()=>{
 const timer=setTimeout(()=>{
 
@@ -38,29 +41,12 @@ const timer=setTimeout(()=>{
         await axios.get("https://jelenatodo.herokuapp.com/listofobligation")
          .then((res)=>
         
-       {  settasks(res.data)
+       {  dispatch(cart.getitems(res.data))
        
-         setall(res.data.map((item)=>(
-            <div className={classes.onediv}key={item.id}>
-               <BsSuitHeart/>
-               
-         <div className={classes.text}>{item.name.toUpperCase()}</div>
-         <div className={classes.text}>{item.text}</div>
-        <div className={classes.text}>{item.date.slice(0,10)}</div>
-        <MdDelete className={classes.trash} onClick={()=>deleteitem(item)} cursor={"pointer"}/>
-        <button onClick={()=>updateitem(item)} className={classes.buttonupdate}>
-            <Link style={{textDecoration:"none",
-        color:"rgb(202, 52, 77)"
-        }} to={`/updateitem:${item.id}`}>
-            ISPRAVI
-            </Link>
-            </button>
-        </div>
-          
-        )
-        
-        ))}).then(()=>
-         setisloading(false))
+       
+      }).then(()=>
+       { 
+         setisloading(false)})
          
         
      }
@@ -68,12 +54,43 @@ const timer=setTimeout(()=>{
 },3000)
 return()=>clearTimeout(timer)
    
-
-// eslint-disable-next-line no-use-before-define
 },[])
+let all;
+all=tasks.map((item)=>(
+    <div className={classes.onediv}key={item.id}>
+       {!item.check&&<BsSuitHeart onClick={()=>dispatch(cart.checkitem(item))}/>}
+       {item.check&& <BsFillSuitHeartFill onClick={()=>dispatch(cart.checkitem(item))}/>}
+ <div className={classes.text}>{item.name.toUpperCase()}</div>
+ <div className={classes.text}>{item.text}</div>
+<div className={classes.text}>{item.date.slice(0,10)}</div>
+<MdDelete className={classes.trash} onClick={()=>deleteitem(item)} cursor={"pointer"}/>
+<button onClick={()=>updateitem(item)} className={classes.buttonupdate}>
+    <Link style={{textDecoration:"none",
+color:"rgb(202, 52, 77)"
+}} to={`/updateitem:${item.id}`}>
+    ISPRAVI
+    </Link>
+    </button>
+</div>
+  
+)
 
-const filterdataday=tasks.filter((item)=>item.date.slice(0,10).includes(dateofobl))
-console.log(filterdataday)
+)
+
+let filterr;
+ const filterdataday=tasks.filter((item)=>item.date.slice(0,10).includes(dateofobl))
+
+if(filterdataday.length!==0){
+    filterr=filterdataday.map((item)=>(
+        <div className={classes.filtertoday}><div className={classes.filtertodayone}>{item.name}
+        </div>
+        <p style={{cursor:"pointer"}} onClick={()=>setshowtodayobligation(false)}>X</p>
+        </div>
+        
+    ))
+
+}
+else if(filterdataday.length===0){filterr=(<div className={classes.filtertoday}>NEMATE OBAVEZE DANAS<p style={{cursor:"pointer"}} onClick={()=>setshowtodayobligation(false)}>X</p></div>)}
 const updateitem=(item)=>{
 dispatch(cart.additem(item))
 }
@@ -89,47 +106,10 @@ const confirmdelete=async()=>{
 
 
 
-const sortbyname=tasks.sort((a,b)=>a.name.localeCompare(b.name)).map((item)=>(
-    <div className={classes.onediv}key={item.id}>
-       <BsSuitHeart/>
-       
- <div className={classes.text}>{item.name.toUpperCase()}</div>
- <div className={classes.text}>{item.text}</div>
-<div className={classes.text}>{item.date.slice(0,10)}</div>
-<MdDelete className={classes.trash} onClick={()=>deleteitem(item)} cursor={"pointer"}/>
-<button onClick={()=>updateitem(item)} className={classes.buttonupdate}>
-    <Link style={{textDecoration:"none",
-color:"rgb(202, 52, 77)"
-}} to={`/updateitem:${item.id}`}>
-    ISPRAVI
-    </Link>
-    </button>
-</div>
-  
-))
  
 
 
-const sortbydate=tasks.sort((a,b)=>a.date.localeCompare(b.date)).map((item)=>(
-    <div className={classes.onediv}key={item.id}>
-       <BsSuitHeart/>
-       
- <div className={classes.text}>{item.name.toUpperCase()}</div>
- <div className={classes.text}>{item.text}</div>
-<div className={classes.text}>{item.date.slice(0,10)}</div>
-<MdDelete className={classes.trash} onClick={()=>deleteitem(item)} cursor={"pointer"}/>
-<button onClick={()=>updateitem(item)} className={classes.buttonupdate}>
-    <Link style={{textDecoration:"none",
-color:"rgb(202, 52, 77)"
-}} to={`/updateitem:${item.id}`}>
-    ISPRAVI
-    </Link>
-    </button>
-</div>
-  
-)
 
-)
 
 const updownarrow=()=>{
     setup((prev)=>!prev)
@@ -137,18 +117,60 @@ const updownarrow=()=>{
 
 
 const sortname=()=>{
-setall(sortbyname)
+    
+    const sortbyname=tasks.slice().sort((a,b)=>a.name.localeCompare(b.name)).map((item)=>(
+        <div className={classes.onediv}key={item.id}>
+           {!item.check&&<BsSuitHeart onClick={()=>dispatch(cart.checkitem(item))}/>}
+               {item.check&& <BsFillSuitHeartFill onClick={()=>dispatch(cart.checkitem(item))}/>}
+           
+     <div className={classes.text}>{item.name.toUpperCase()}</div>
+     <div className={classes.text}>{item.text}</div>
+    <div className={classes.text}>{item.date.slice(0,10)}</div>
+    <MdDelete className={classes.trash} onClick={()=>deleteitem(item)} cursor={"pointer"}/>
+    <button onClick={()=>updateitem(item)} className={classes.buttonupdate}>
+        <Link style={{textDecoration:"none",
+    color:"rgb(202, 52, 77)"
+    }} to={`/updateitem:${item.id}`}>
+        ISPRAVI
+        </Link>
+        </button>
+    </div>
+      
+    ))  
+all=sortbyname
 }
 const sortdate=()=>{
+    
+    const sortbydate=tasks.slice().sort((a,b)=>a.date.localeCompare(b.date)).map((item)=>(
+        <div className={classes.onediv}key={item.id}>
+          {!item.check&&<BsSuitHeart onClick={()=>dispatch(cart.checkitem(item))}/>}
+               {item.check&& <BsFillSuitHeartFill onClick={()=>dispatch(cart.checkitem(item))}/>}
+           
+     <div className={classes.text}>{item.name.toUpperCase()}</div>
+     <div className={classes.text}>{item.text}</div>
+    <div className={classes.text}>{item.date.slice(0,10)}</div>
+    <MdDelete className={classes.trash} onClick={()=>deleteitem(item)} cursor={"pointer"}/>
+    <button onClick={()=>updateitem(item)} className={classes.buttonupdate}>
+        <Link style={{textDecoration:"none",
+    color:"rgb(202, 52, 77)"
+    }} to={`/updateitem:${item.id}`}>
+        ISPRAVI
+        </Link>
+        </button>
+    </div>
+      
+    )
+    
+    )  
 
-setall(sortbydate)
+all=sortbydate
 }
 
 const searchitems=(e)=>{
-    const oneofall=tasks.filter((item)=>item.name.trim().toLowerCase().includes(e.target.value.toLowerCase()))
-  setall(oneofall.map((item)=>(
+    const oneofall=tasks.slice().filter((item)=>item.name.trim().toLowerCase().includes(e.target.value.toLowerCase())).map((item)=>(
     <div className={classes.onediv}key={item.id}>
-       <BsSuitHeart/>
+        {!item.check&&<BsSuitHeart onClick={()=>dispatch(cart.checkitem(item))}/>}
+               {item.check&& <BsFillSuitHeartFill onClick={()=>dispatch(cart.checkitem(item))}/>}
        
  <div className={classes.text}>{item.name.toUpperCase()}</div>
  <div className={classes.text}>{item.text}</div>
@@ -165,15 +187,23 @@ color:"rgb(202, 52, 77)"
   
 )
 
-))
+)
+setsearch(oneofall)
 
    }
+   if(searchhh.length!==0){
+    all=searchhh
+   }
+
+
+   
 
     return (
       <div className={classes.div}> 
              {!loading&&<h1 className="title">MOJA TO DO LISTA</h1>}
              
-            {!loading&&<div  className={classes.sort} style={{cursor:"pointer"}}><input onChange={searchitems} className={classes.inputsearch} placeholder="Search by name"/><b>SORTIRAJ <span onClick={updownarrow} className='downspan'>
+            {!loading&&<div  className={classes.sort} style={{cursor:"pointer"}}>
+                <input onChange={searchitems} className={classes.inputsearch} placeholder="Search by name"/><b>SORTIRAJ <span onClick={updownarrow} className='downspan'>
                { up&&<AiOutlineDown style={{cursor:"pointer"}}/>}
              {!up&&<AiOutlineUp style={{cursor:"pointer"}}/>
              
@@ -186,7 +216,7 @@ color:"rgb(202, 52, 77)"
         {!loading&&<div className={deletee?`${classes.divall} ${classes.animation}`:`${classes.divall} ${classes.animation2}`} >
             
             <div  className={classes.onediv}>
-            <BsSuitHeart  style={{visibility:"hidden"}}/> <div className={classes.text}>
+            <BsSuitHeart   style={{visibility:"hidden"}}/> <div className={classes.text}>
                 <b>NAZIV</b>
                 </div>
                 <div className={classes.text}>
@@ -202,7 +232,14 @@ color:"rgb(202, 52, 77)"
            
             {all}
         </div>}
-        <Link className={classes.link} to="/">Vratite se na pocetnu stranicu</Link> 
+        <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+             <Link className={classes.link} to="/">Vratite se na pocetnu stranicu</Link> 
+        
+        <button className={classes.link} onClick={()=>setshowtodayobligation(true)}>OBAVEZE ZA DANAS</button> 
+            </div>
+       {showtodayobligation&&!loading&&<div>
+        {filterr}
+        </div>}
         
         </div>
     );

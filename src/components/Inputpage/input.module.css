@@ -64,7 +64,8 @@ font-size: x-small;
 .divlink{
     display: flex;
     justify-content: space-around;
-    margin-top: 15%;
+    margin-top: 10%;
+    margin-bottom:10% ;
 }
 .link{
     color:white;
