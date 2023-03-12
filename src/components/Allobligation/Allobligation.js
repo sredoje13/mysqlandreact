@@ -28,6 +28,8 @@ console.log(dateofobl)
     const[loading,setisloading]=useState(true)
    const[showtodayobligation,setshowtodayobligation]=useState(false)
 const[searchhh,setsearch]=useState([])
+const[sortdate,setsortdate]=useState(false)
+const[sortname,setsortname]=useState(false)
     const itemms=useSelector((state)=>state.cartitem.item);
     const deletee=useSelector((state)=>state.cartitem.delete);
    const tasks=useSelector((state)=>state.cartitem.tasks)
@@ -116,7 +118,7 @@ const updownarrow=()=>{
 }
 
 
-const sortname=()=>{
+
     
     const sortbyname=tasks.slice().sort((a,b)=>a.name.localeCompare(b.name)).map((item)=>(
         <div className={classes.onediv}key={item.id}>
@@ -137,9 +139,8 @@ const sortname=()=>{
     </div>
       
     ))  
-all=sortbyname
-}
-const sortdate=()=>{
+
+
     
     const sortbydate=tasks.slice().sort((a,b)=>a.date.localeCompare(b.date)).map((item)=>(
         <div className={classes.onediv}key={item.id}>
@@ -163,8 +164,8 @@ const sortdate=()=>{
     
     )  
 
-all=sortbydate
-}
+
+
 
 const searchitems=(e)=>{
     const oneofall=tasks.slice().filter((item)=>item.name.trim().toLowerCase().includes(e.target.value.toLowerCase())).map((item)=>(
@@ -194,6 +195,12 @@ setsearch(oneofall)
    if(searchhh.length!==0){
     all=searchhh
    }
+   else if(sortdate){
+     all=sortbydate
+   }
+   else if(sortname){
+    all=sortbyname
+   }
 
 
    
@@ -208,8 +215,8 @@ setsearch(oneofall)
              {!up&&<AiOutlineUp style={{cursor:"pointer"}}/>
              
              }
-            { !up&&<div><p className={classes.sortone} onClick={sortname}>IME</p>
-            <p className={classes.sortone} onClick={sortdate}>DATUM</p></div>}
+            { !up&&<div><p className={classes.sortone} onClick={()=>{setsortname(true);setsortdate(false)}}>IME</p>
+            <p className={classes.sortone} onClick={()=>{setsortdate(true);setsortname(false)}}>DATUM</p></div>}
              </span></b></div>}
         {deletee&&<Deleteitem onclick={confirmdelete} name={itemms.name}/>}
      {loading&&<Loadingspiner/>}
