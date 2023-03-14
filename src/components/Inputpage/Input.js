@@ -5,7 +5,7 @@ import {GiBowTieRibbon} from 'react-icons/gi'
 import classes from './input.module.css'
 import axios from 'axios'
 import useHook from './useHookinput';
-import {Link, useLocation} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Image from '../../Myproject.jpg'
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -14,7 +14,8 @@ function Input(props) {
 
    const history=useHistory()
     const update=useSelector((state)=>state.cartitem.update)
-  const loc=useLocation()
+ const upitem=useSelector((state)=>state.cartitem.item)
+ console.log(upitem)
 const location=window.location.pathname.split("/")[1].split(":")
 console.log(location)
 console.log(location[1])
@@ -58,18 +59,28 @@ const alldatas={
     date:dateValue,
     name:nameValue,
     text:areaValue,
+   
     
+}
+const alldatas2={
+    date:dateValue,
+    name:nameValue,
+    text:areaValue,
+    check:1,
+    id:upitem.id
 }
 const submitHandler=async(e)=>{
 e.preventDefault()
 try{
  
 if(isvalid){
+    
    await axios.post("https://jelenatodo.herokuapp.com/listofobligation",alldatas)
  restartArea();
 restartDate();
 restartName();
 toast.success("Uspesno ste sastavili svoj naredni zadatak!")
+
 }
 else{
     toast.error("Morate popuniti sva polja!!!")
@@ -84,13 +95,22 @@ const updateitems=async(e)=>{
     try{
       
         if(isvalid){
-           await axios.put(`https://jelenatodo.herokuapp.com/listofobligation/${location[1]}`,alldatas)
+            if(upitem.check===1){
+           await axios.put(`https://checkapp.herokuapp.com/checkdatas/${location[1]}`,alldatas2)
         restartArea();
         restartDate();
         restartName();
         toast.success("Uspesno ste ispravili svoj zadatak!")
-        history.push("/allobligations");
-
+       /*  history.push("/allobligations"); */
+            }
+            else if(!upitem.check){
+                await axios.put(`https://jelenatodo.herokuapp.com/listofobligation/${location[1]}`,alldatas)
+                restartArea();
+                restartDate();
+                restartName();
+                toast.success("Uspesno ste ispravili svoj zadatak!")
+                history.push("/allobligations");
+            }
         }
         else{
             toast.error("Morate popuniti sva polja!!!")

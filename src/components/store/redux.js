@@ -1,7 +1,9 @@
 import { createSlice ,configureStore} from "@reduxjs/toolkit";
+import _ from 'lodash'
 const cartitem=createSlice({
     name:"cartitem",
-    initialState:{ item:{},update:false, delete:false,tasks:[],heart:false},
+    initialState:{ item:{},update:false, 
+    delete:false,tasks:[],heart:false, chechkitem:[]},
     reducers:{
         additem(state,action){
        state.item=action.payload;
@@ -27,17 +29,39 @@ const cartitem=createSlice({
 
         },
         checkitem(state,action) {
-            state.heart=!state.heart
-            const cheking=state.heart
+           
+           
           const checkeditem=action.payload
-          const showitem={...checkeditem,check:cheking}
-         const itemone=state.tasks.findIndex((item)=>item.id===checkeditem.id)
-         console.log(itemone)
-         state.tasks[itemone]=showitem
-         console.log(state.tasks)
-
+          const showitem={...checkeditem,check:true}
+          const otheritem={...checkeditem,check:null}
+         const itemone=state.tasks.filter((item)=>item.id!==checkeditem.id)
+         const itemones=state.tasks.findIndex((item)=>item.id===checkeditem.id)
+         console.log(checkeditem)
+         state.index=itemones
+         if(!action.payload.check){
+         state.tasks=[showitem,...itemone]
+        
+         }
+         else if(action.payload.check){
+            state.tasks[itemones]=otheritem 
+         }
+        
          
+        },
+       getallcheckitems(state,action){
+       
+        var Obj3 = _.differenceWith(state.tasks, action.payload, function (o1, o2) {
+            return o2['id'] === o1['id']
+        });
+      
+       
+        
+      
+       state.tasks=[...action.payload,...Obj3]
+      
         }
+     
+
         
     }
 })

@@ -100,6 +100,27 @@ align-items: center;
   border-bottom: rgb(170, 1, 72);
   
 }
+.divtitleimage{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}
+.image{
+    width:100px;
+    height:100px;
+    margin-left:20px;
+    margin-top:0px;
+    color:rgb(170, 1, 72)
+}
+.imagep{
+    font-size: x-small;
+    width:70%;
+    color:rgb(143, 24, 89);
+   
+
+}
+.image:hover{scale:1.3}
 @keyframes move{
     0%{
   
@@ -139,21 +160,119 @@ align-items: center;
 .link:hover{
     scale:1.2
 }
+.allcheckdata{
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+    background-color:pink;
+    margin-top:20px;
+    box-shadow:0px 0px 15px 5px rgb(143, 24, 89)
+}
+.checkdata{
+    padding:5px;
+  display: flex;  
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color:rgb(202, 52, 77);
+  color:white;
+  border-bottom:1px solid rgb(26, 25, 25);
+  width:100%
+}
+.checkname{
+    font-family: 'Rowdies', cursive;
+    width:30%;
+    text-align: start;
+
+
+}
+.checkdate{
+    font-family: 'Rowdies', cursive;
+    width:30%;
+    text-align: end;
+}
+.checknodiv{
+  margin-top: 20px;  
+  background-color:rgb(202, 52, 77);
+  color:white;
+  border:1px solid rgb(240, 236, 236);
+  padding:10px;
+  font-size: x-large;
+  border-radius: 20px;
+} 
+.closecheckbutton{
+    margin-top:15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgb(202, 52, 77);
+    font-size: xx-large;
+    border:0px;
+    background-color:inherit;
+
+}
+.closecheckbutton:hover{
+    color:white;
+}
+.filterdiv{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (max-width:800px){
+
+    .checkdate, .checkname{
+        font-size: small;
+        width:45%
+    }
+    .closecheckbutton{
+      
+        font-size: x-large;
+      
+    
+    }
+
+}
 @media only screen and (max-width:550px){
 .text{
     font-size: smaller;
 }
+.image{
+   width:50px;
+   margin-top: -10px;
+   margin-left: -10px;
+}
+.imagep{
+    margin-top:-25px;
+    margin-left: -15px;
+}
 
 }
 @media only screen and (max-width:480px){
+
+    .checkdate, .checkname{
+        font-size: x-small;
+        width:50%
+    }
     .text{
         font-size: x-small;
     }
     .buttonupdate{
         font-size: x-small;
           }
+          .checknodiv{font-size:medium}
+
+          .closecheckbutton{   
+            font-size: large;
+        
+        }    
     }
  @media only screen and (max-width:385px){
+    .checknodiv{font-size:small}
     .text{
     font-size: xx-small;
     }
@@ -167,6 +286,10 @@ align-items: center;
             border-bottom-right-radius: 40px 100px;
           
         }
+        .image{
+            margin-top: 2px;
+        }
+        
    }
  @media only screen and (max-width:360px){
      .text{
@@ -175,6 +298,10 @@ align-items: center;
 
 }
 @media only screen and (max-width:300px){
+    .checkdate, .checkname{
+        font-size: xx-small;
+        width:50%
+    }
     .text{
         font-size:5%;
     }
@@ -182,5 +309,6 @@ align-items: center;
         font-size: 5%;
           }
     }
+
              
         
